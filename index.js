@@ -1,15 +1,15 @@
-const selectionSortRecursive = (arr, start = 0) => {
-  if (start >= arr.length - 1) {
-    return arr;
+function removeNthFromEnd(head, n) {
+  const dummy = new ListNode(0);
+  dummy.next = head;
+  let first = dummy;
+  let second = dummy;
+  for (let i = 1; i <= n + 1; i++) {
+    first = first.next;
   }
-  let minIndex = start;
-  for (let i = start + 1; i < arr.length; i++) {
-    if (arr[i] < arr[minIndex]) {
-      minIndex = i;
-    }
+  while (first !== null) {
+    first = first.next;
+    second = second.next;
   }
-  if (minIndex !== start) {
-    [arr[start], arr[minIndex]] = [arr[minIndex], arr[start]];
-  }
-  return selectionSortRecursive(arr, start + 1);
-};
+  second.next = second.next.next;
+  return dummy.next;
+}
